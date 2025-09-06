@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from core.configs import settings
+from api.v1.api import api_router
 
 app = FastAPI(
     title="Curso de Fastapi",
@@ -6,10 +8,8 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
 
 if __name__ == "__main__":
     import uvicorn
